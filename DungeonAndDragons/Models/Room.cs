@@ -17,17 +17,24 @@ namespace DungeonAndDragons.Models
 
         private Trap Traps;
 
-        public Room(string name, Enemy enemy = null, Treasure treasure = null, Trap trap = null)
+        private string Message;
+
+        public Room(string name, string message, Enemy enemy = null, Treasure treasure = null, Trap trap = null )
         {
             Name = name;
             Enemies = enemy;
             Treasures = treasure;
             Traps = trap;
+            Message = message;
         }
 
-        public string GetName()
+        public void GetName()
         {
-            return Name;
+          Console.WriteLine($"Você está na {Name}");
+        }
+
+        public void GetMessage() {
+            Console.WriteLine(Message);
         }
 
         public Dictionary<string, Room> GetExits()
