@@ -1,0 +1,14 @@
+C:\Users\Vitor\Documents\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.exe
+C:\Users\Vitor\Documents\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.deps.json
+C:\Users\Vitor\Documents\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.runtimeconfig.json
+C:\Users\Vitor\Documents\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.dll
+C:\Users\Vitor\Documents\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.pdb
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.AssemblyInfoInputs.cache
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.AssemblyInfo.cs
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.csproj.CoreCompileInputs.cache
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.dll
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\refint\DungeonAndDragons.dll
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.pdb
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.genruntimeconfig.cache
+C:\Users\Vitor\Documents\DungeonAndDragons\obj\Debug\net8.0\ref\DungeonAndDragons.dll
