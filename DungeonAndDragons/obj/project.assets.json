@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Vitor\\.nuget\\packages\\": {}
+    "C:\\Users\\sidne\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vitor\\Documents\\DungeonAndDragons\\DungeonAndDragons.csproj",
+      "projectUniqueName": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\Dungeon-And-Dragons\\DungeonAndDragons\\DungeonAndDragons.csproj",
       "projectName": "DungeonAndDragons",
-      "projectPath": "C:\\Users\\Vitor\\Documents\\DungeonAndDragons\\DungeonAndDragons.csproj",
-      "packagesPath": "C:\\Users\\Vitor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vitor\\Documents\\DungeonAndDragons\\obj\\",
+      "projectPath": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\Dungeon-And-Dragons\\DungeonAndDragons\\DungeonAndDragons.csproj",
+      "packagesPath": "C:\\Users\\sidne\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\Dungeon-And-Dragons\\DungeonAndDragons\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sidne\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

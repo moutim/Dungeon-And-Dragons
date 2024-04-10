@@ -11,6 +11,7 @@ class Program
   }
 
   private Room[] Rooms;
+  private Room CurrentRoom;
 
   private void RunGame()
   {
@@ -28,7 +29,7 @@ class Program
     Room[] rooms = CreateRooms();
     Rooms = rooms;
 
-    Room currentRoom = Rooms[0];
+    CurrentRoom = Rooms[0];
     bool gameRunning = true;
 
     while (gameRunning)
@@ -43,10 +44,10 @@ class Program
       switch (option)
       {
         case 1:
-          currentRoom.GetName();
-          Console.WriteLine("digita norte");
+          CurrentRoom.GetName();
           string direcao = Console.ReadLine();
-          MovePlayer(direcao, currentRoom);
+          MovePlayer(direcao);
+          Console.WriteLine(CurrentRoom.GetName());
           break;
         default:
           Console.WriteLine("Escolha uma opção válida!");
@@ -57,7 +58,7 @@ class Program
 
   private static Room[] CreateRooms()
   {
-    Room[] rooms = new Room[7];
+    Room[] rooms = new Room[8];
 
     Enemy enemy1 = new Enemy("Goblin", 50, 10);
     Enemy enemy2 = new Enemy("Esqueleto", 50, 10);
@@ -75,26 +76,21 @@ class Program
 
     Room room1 = new Room(
       name: "Sala 1",
-      // exit: ["norte", "leste"],
+
       trap: trapSala1
     );
 
-    Room lobby = new Room(
-      name: "Saguão"
-    // exit: ["sul", "leste", "oeste"]
-    );
-    lobby.AddExit("norte", room1);
+
+
 
     Room room2 = new Room(
       name: "Sala 2",
-      // exit: ["sul"],
       enemy: orc,
       treasure: potion
     );
 
     Room room3 = new Room(
       name: "Sala 3",
-      // exit: ["norte"],
       enemy: orc,
       treasure: potion
     );
@@ -105,13 +101,41 @@ class Program
 
     Room room5 = new Room(
       name: "Sala 5"
-    // exit: ["sul", "norte"]
+
     );
 
     Room room6 = new Room(
       name: "Sala 6"
-    // exit: ["leste", "norte"]
     );
+
+    Room room7 = new Room(
+     name: "Sala 7"
+   );
+
+    Room lobby = new Room(
+          name: "Saguão"
+
+        );
+
+    lobby.AddExit("oeste", room1);
+    lobby.AddExit("sul", room3);
+    lobby.AddExit("leste", room4);
+
+    room1.AddExit("leste", lobby);
+    room1.AddExit("norte", room2);
+
+    room2.AddExit("sul", room1);
+
+    room3.AddExit("norte", lobby);
+
+    room4.AddExit("oeste", lobby);
+    room4.AddExit("sul", room5);
+
+    room5.AddExit("norte", room4);
+    room5.AddExit("sul", room6);
+
+    room6.AddExit("norte", room5);
+    room6.AddExit("leste", room7);
 
     rooms[0] = lobby;
     rooms[1] = room1;
@@ -120,13 +144,17 @@ class Program
     rooms[4] = room4;
     rooms[5] = room5;
     rooms[6] = room6;
+    rooms[7] = room7;
+
+
+
 
     return rooms;
   }
 
-  public void MovePlayer(string direction, Room currentRoom)
+  public void MovePlayer(string direction)
   {
-    Room nextRoom = currentRoom.GetExits()[direction];
+    Room nextRoom = CurrentRoom.GetExits()[direction];
 
     if (nextRoom == null)
     {
@@ -134,8 +162,8 @@ class Program
     }
     else
     {
-      currentRoom = nextRoom;
-      Console.WriteLine("Você entrou na sala: " + currentRoom.GetName());
+      CurrentRoom = nextRoom;
+      Console.WriteLine("Você entrou na sala: " + CurrentRoom.GetName());
 
       // int trapDamage = currentRoom.ActivateTrap();
       // if (trapDamage > 0)
