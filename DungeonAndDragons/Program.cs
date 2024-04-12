@@ -34,10 +34,12 @@ class Program
 
     while (gameRunning)
     {
+      Console.WriteLine("-----------------------------------------------------");
       Console.WriteLine("Escolha uma ação:");
-      Console.WriteLine("1. Mover para outra sala (Norte, Sul, Leste, Oeste)");
+      Console.WriteLine("1. Mover para outra sala");
       Console.WriteLine("2. Ver status");
       Console.WriteLine("3. Desistir");
+      Console.WriteLine("-----------------------------------------------------");
 
       int option = int.Parse(Console.ReadLine());
 
@@ -45,9 +47,11 @@ class Program
       {
         case 1:
           CurrentRoom.GetName();
+          Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
           string direcao = Console.ReadLine();
           MovePlayer(direcao);
-          Console.WriteLine(CurrentRoom.GetName());
+          CurrentRoom.GetName();
+          CurrentRoom.GetMessage();
           break;
         default:
           Console.WriteLine("Escolha uma opção válida!");
@@ -60,59 +64,65 @@ class Program
   {
     Room[] rooms = new Room[8];
 
-    Enemy enemy1 = new Enemy("Goblin", 50, 10);
-    Enemy enemy2 = new Enemy("Esqueleto", 50, 10);
+    Enemy mummy = new Enemy("Mumia", 50, 10);
     Enemy orc = new Enemy("Orc", 50, 10);
-    Enemy enemy3 = new Enemy("Caveira", 50, 10);
-    Enemy enemy4 = new Enemy("Zumbi", 50, 10);
+    Enemy blackSkeleton = new Enemy("Esqueleto Negro", 50, 10);
+    Enemy mage = new Enemy("Mago", 50, 10);
 
-    Treasure treasure1 = new Treasure("Espada");
+    Treasure key = new Treasure("Chave Enferrujada");
     Treasure potion = new Treasure("Poção de Cura");
-    Treasure treasure3 = new Treasure("Tridente");
+    Treasure masterSword = new Treasure("Espada Mestra");
 
     Trap trapSala1 = new Trap(10);
-    Trap trap2 = new Trap(20);
-    Trap trap3 = new Trap(30);
+    Trap trapSala5 = new Trap(20);
 
     Room room1 = new Room(
+      message: "A sala está vazia, explore ao seu redor.",
       name: "Sala 1",
-
       trap: trapSala1
     );
 
-
-
-
     Room room2 = new Room(
+      message: "Existem inimigos ou tesouros nesta sala.",
       name: "Sala 2",
       enemy: orc,
-      treasure: potion
+      treasure: key
     );
 
     Room room3 = new Room(
+      message: "Existem inimigos a sua frente. Esta sala também contem um velho baú, explore outras salas e encontre sua chave!",
       name: "Sala 3",
-      enemy: orc,
-      treasure: potion
+      enemy: blackSkeleton,
+      treasure: masterSword
+
     );
 
     Room room4 = new Room(
+      message: "A sala está vazia, explore ao seu redor.",
       name: "Sala 4"
     );
 
     Room room5 = new Room(
-      name: "Sala 5"
-
+      message: "Existem inimigos ou tesouros nesta sala.",
+      name: "Sala 5",
+      trap: trapSala5,
+      treasure: potion
     );
 
     Room room6 = new Room(
-      name: "Sala 6"
+      message: "Existem inimigos ou tesouros nesta sala.",
+      name: "Sala 6",
+      enemy: mummy
     );
 
     Room room7 = new Room(
-     name: "Sala 7"
+      message: "Voce chegou ao desafio final, enfrente o Mago.",
+     name: "Sala 7",
+     enemy: mage
    );
 
     Room lobby = new Room(
+          message: "Voce entrou na Dungeon, explore ao seu redor.",
           name: "Saguão"
 
         );
@@ -154,32 +164,37 @@ class Program
 
   public void MovePlayer(string direction)
   {
-    Room nextRoom = CurrentRoom.GetExits()[direction];
 
-    if (nextRoom == null)
+
+    try
+    {
+
+      Room nextRoom = CurrentRoom.GetExits()[direction];
+      CurrentRoom = nextRoom;
+    }
+    catch (Exception ex)
     {
       Console.WriteLine("Não há uma sala nessa direção.");
     }
-    else
-    {
-      CurrentRoom = nextRoom;
-      Console.WriteLine("Você entrou na sala: " + CurrentRoom.GetName());
 
-      // int trapDamage = currentRoom.ActivateTrap();
-      // if (trapDamage > 0)
-      // {
-      //     Console.WriteLine("Você ativou uma armadilha e sofreu " + trapDamage + " de dano!");
-      //     player.ReduceHealth(trapDamage);
-      // }
 
-      // if (currentRoom.GetEnemies().Length == 0 && currentRoom.GetTreasures().Length == 0)
-      // {
-      //     Console.WriteLine("A sala está vazia. Continue explorando.");
-      // }
-      // else
-      // {
-      //     Console.WriteLine("Há inimigos ou tesouros nesta sala. Tome cuidado!");
-      // }
-    }
+
+
+
+    // int trapDamage = currentRoom.ActivateTrap();
+    // if (trapDamage > 0)
+    // {
+    //     Console.WriteLine("Você ativou uma armadilha e sofreu " + trapDamage + " de dano!");
+    //     player.ReduceHealth(trapDamage);
+    // }
+
+    // if (currentRoom.GetEnemies().Length == 0 && currentRoom.GetTreasures().Length == 0)
+    // {
+    //     Console.WriteLine("A sala está vazia. Continue explorando.");
+    // }
+    // else
+    // {
+    //     Console.WriteLine("Há inimigos ou tesouros nesta sala. Tome cuidado!");
+    // }
   }
 }
