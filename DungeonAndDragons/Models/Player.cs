@@ -12,25 +12,27 @@ namespace DungeonAndDragons.Models
         public int Attack { get; set; }
         public int Health { get; set; }
 
-        public Player(string name, int attack, string Vocation)
+        public Player(string name, string vocation)
         {
             Name = name;
-            Attack = attack;
 
-            if (Vocation == "1")
+            if (vocation == "1")
             {
                 Health = 100;
-                Attack = 100;
+                Attack = 30;
+                Vocation = "Guerreiro";
             }
-            else if (Vocation == "2")
+            else if (vocation == "2")
             {
-                Health = 50;
-                Attack = 150;
+                Health = 80;
+                Attack = 40;
+                Vocation = "Mago";
             }
-            else if (Vocation == "3")
+            else if (vocation == "3")
             {
-                Health = 150;
-                Attack = 50;
+                Health = 60;
+                Attack = 40;
+                Vocation = "Arqueiro";
             }
         }
 

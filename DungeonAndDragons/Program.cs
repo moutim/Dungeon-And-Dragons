@@ -4,27 +4,26 @@ using Microsoft.VisualBasic;
 
 class Program
 {
-  public static void Main()
-  {
-    Program program = new Program(); // Criando uma instância de Program.
-    program.RunGame(); // Chamando o método RunGame da instância criada.
-  }
-
   private Room[] Rooms;
   private Room CurrentRoom;
+  public static void Main()
+  {
+    Program program = new Program();
+    program.RunGame();
+  }
 
   private void RunGame()
   {
     Console.WriteLine("Bem vindo ao Dungeon Game!");
     Console.WriteLine("Para começar o jogo, escolha um nome e uma classe!");
 
-    Console.WriteLine("Qual o seu nome?");
+    Console.WriteLine("Qual o seu nome pobre alma?");
     string nome = Console.ReadLine();
 
-    Console.WriteLine("Escolha uma vocação: 1 - Guerreiro, 2 - Mago, 3 - Arqueiro");
+    Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
     string vocacao = Console.ReadLine();
 
-    Player jogador = new Player(nome, 100, vocacao);
+    Player jogador = new Player(nome, vocacao);
 
     Room[] rooms = CreateRooms();
     Rooms = rooms;
@@ -34,12 +33,12 @@ class Program
 
     while (gameRunning)
     {
-      Console.WriteLine("-----------------------------------------------------");
-      Console.WriteLine("Escolha uma ação:");
+      Console.WriteLine("--------------------------------------");
+      Console.WriteLine($"Escolha uma ação {jogador.Vocation}:");
       Console.WriteLine("1. Mover para outra sala");
       Console.WriteLine("2. Ver status");
       Console.WriteLine("3. Desistir");
-      Console.WriteLine("-----------------------------------------------------");
+      Console.WriteLine("--------------------------------------");
 
       int option = int.Parse(Console.ReadLine());
 
