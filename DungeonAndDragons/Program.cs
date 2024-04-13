@@ -24,7 +24,7 @@ class Program
     string vocacao;
     do
     {
-      Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
+      Console.WriteLine("Como você irá enfrentar os desafios da masmorra? \n 1 - Guerreiro (220 de vida e 20 de ataque), \n 2 - Mago (150 de vida e 30 de ataque), \n 3 - Arqueiro (180 de vida e 25 de ataque)");
       vocacao = Console.ReadLine();
 
       switch (vocacao)
@@ -54,41 +54,61 @@ class Program
     bool gameRunning = true;
 
     while (gameRunning)
+{
+    Console.WriteLine("--------------------------------------");
+    Console.WriteLine("Escolha uma ação:");
+    Console.WriteLine("1. Mover para outra sala");
+    Console.WriteLine("2. Ver status");
+    Console.WriteLine("3. Desistir");
+    Console.WriteLine("--------------------------------------");
+
+    int option;
+    if (!int.TryParse(Console.ReadLine(), out option))
     {
-      Console.WriteLine("--------------------------------------");
-      Console.WriteLine("Escolha uma ação:");
-      Console.WriteLine("1. Mover para outra sala");
-      Console.WriteLine("2. Ver status");
-      Console.WriteLine("3. Desistir");
-      Console.WriteLine("--------------------------------------");
-
-      int option = int.Parse(Console.ReadLine());
-
-      switch (option)
-      {
-        case 1:
-          Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
-          string direcao = Console.ReadLine();
-          MovePlayer(direcao);
-          break;
-        case 2:
-          showPlayerStatus();
-          break;
-        default:
-          Console.WriteLine("Escolha uma opção válida!");
-          break;
-      }
+        Console.WriteLine("Por favor, digite um número para escolher uma ação.");
+        continue;
     }
+
+    switch (option)
+    {
+        case 1:
+            string direcao;
+            do
+            {
+                Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
+                direcao = Console.ReadLine().ToLower();
+                if (direcao != "norte" && direcao != "leste" && direcao != "sul" && direcao != "oeste")
+                {
+                    Console.WriteLine("Direção inválida. Por favor, digite uma direção válida.");
+                    direcao = null; 
+                }
+            } while (direcao == null);
+            MovePlayer(direcao);
+            break;
+        case 2:
+            showPlayerStatus();
+            break;
+        case 3:
+            gameRunning = false;
+            Console.WriteLine("Você desistiu do jogo.");
+            break;
+        default:
+            Console.WriteLine("Escolha uma opção válida!");
+            break;
+    }
+}
+
+
+
   }
 
   private static Room[] CreateRooms()
   {
     Room[] rooms = new Room[8];
 
-    Enemy mummy = new Enemy("Mumia", 50, 10);
-    Enemy orc = new Enemy("Orc", 50, 10);
-    Enemy blackSkeleton = new Enemy("Esqueleto Negro", 50, 10);
-    Enemy mage = new Enemy("Mago", 50, 10);
+    Enemy mummy = new Enemy("Mumia", 30, 10);
+    Enemy orc = new Enemy("Orc", 50, 15);
+    Enemy mage = new Enemy("Mago Maligno", 100, 25);
 
     Treasure key = new Treasure("Chave Enferrujada");
     Treasure potion = new Treasure("Poção de Cura");
@@ -111,7 +131,7 @@ class Program
     Room room3 = new Room(
       message: "Existem inimigos a sua frente. Esta sala também contem um velho baú, explore outras salas e encontre sua chave!",
       name: "Sala 3",
-      enemy: blackSkeleton,
+      enemy: mummy,
       treasure: masterSword
 
     );
@@ -122,7 +142,7 @@ class Program
     );
 
     Room room5 = new Room(
-      message: "Existem inimigos ou tesouros nesta sala.",
+      message: "A sala está vazia, explore ao seu redor.",
       name: "Sala 5",
       trap: trapSala5
     );
@@ -260,7 +280,7 @@ class Program
     }
     catch (Exception ex)
     {
-      Console.WriteLine("Não há uma sala nessa direção.");
+      Console.WriteLine("Não existe uma sala nesta direção");
     }
   }
 

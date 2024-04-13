@@ -21,24 +21,24 @@ namespace DungeonAndDragons.Models
 
             if (vocation == "1")
             {
-                Health = 100;
-                Attack = 30;
+                Health = 220;
+                Attack = 20;
                 Vocation = "Guerreiro";
                 Weapon = "Machado";
                 Key = null;
             }
             else if (vocation == "2")
             {
-                Health = 80;
-                Attack = 40;
+                Health = 150;
+                Attack = 30;
                 Vocation = "Mago";
                 Weapon = "Cajado";
                 Key = null;
             }
             else if (vocation == "3")
             {
-                Health = 60;
-                Attack = 40;
+                Health = 180;
+                Attack = 25;
                 Vocation = "Arqueiro";
                 Weapon = "Arco";
                 Key = null;
