@@ -5,7 +5,7 @@ using Microsoft.VisualBasic;
 class Program
 {
 
-   bool gameRunning = true;
+  bool gameRunning = true;
   private Room[] Rooms;
   private Room CurrentRoom;
   private Player Jogador;
@@ -18,7 +18,7 @@ class Program
   private void RunGame()
   {
 
-   
+
 
     Console.WriteLine("Bem vindo ao Dungeon Game!");
     Console.WriteLine("Para começar o jogo, escolha um nome e uma classe!");
@@ -56,7 +56,7 @@ class Program
     Rooms = rooms;
 
     CurrentRoom = Rooms[0];
-    
+
 
     while (gameRunning)
     {
@@ -91,7 +91,7 @@ class Program
           MovePlayer(direcao);
           break;
         case 2:
-          showPlayerStatus();
+          showPlayerStatus(Jogador);
           break;
         case 3:
           gameRunning = false;
@@ -153,8 +153,9 @@ class Program
     );
 
     Room room6 = new Room(
-      message: "A sala está vazia, explore ao seu redor.",
-      name: "Sala 6"
+      message: "Parece que há algum tesouro por aqui..",
+      name: "Sala 6",
+      treasure: potion
     );
 
     Room room7 = new Room(
@@ -208,13 +209,12 @@ class Program
       CurrentRoom = nextRoom;
 
       Console.WriteLine("-------//-------//-------");
-      CurrentRoom.GetMessage();
       CurrentRoom.GetName();
+      CurrentRoom.GetMessage();
 
       Enemy? enemyRoom = CurrentRoom.GetEnemies();
-      string? treasureRoom = CurrentRoom.GetTreasures();
 
-      if (enemyRoom != null )
+      if (enemyRoom != null && !enemyRoom.IsDefeated() && CurrentRoom.Name != "Sala 7")
       {
         Console.WriteLine("-------//-------//-------");
 
@@ -237,7 +237,7 @@ class Program
             Console.WriteLine($"Você faz um ataque de {Jogador.GetAttack()} de dano com o {Jogador.Weapon} no inimigo!");
             enemyRoom.ReduceHealth(Jogador.GetAttack());
 
-            if (enemyRoom.GetHealth() <= 0)
+            if (enemyRoom.IsDefeated())
             {
               Console.WriteLine($"Com esse ataque o {enemyRoom.GetName()} da seu último suspiro e morre");
 
@@ -258,39 +258,36 @@ class Program
           }
           else if (option == 2)
           {
-            showPlayerStatus();
+            showPlayerStatus(Jogador);
           }
         }
 
       }
 
-      if (treasureRoom != null)
+      if (CurrentRoom.Name == "Sala 3")
       {
-        if (CurrentRoom.Name == "Sala 3")
+        Console.WriteLine("Existe um baú trancado nesta sala, parece que tem uma fechadura para uma velha chave enferrujada.");
+        if (Jogador.Key != null)
         {
-          Console.WriteLine("Existe um baú trancado nesta sala, parece que tem uma fechadura para uma velha chave enferrujada.");
-          if (Jogador.Key != null)
-          {
-            Console.WriteLine($"A {Jogador.Key} está com você!");
-            Console.WriteLine($"Você abre o baú e ganha a {CurrentRoom.GetTreasures()}");
+          Console.WriteLine($"A {Jogador.Key} está com você!");
+          Console.WriteLine($"Você abre o baú e ganha a {CurrentRoom.GetTreasures()}");
 
-            Jogador.ChangeAttack(100);
-            Jogador.Weapon = CurrentRoom.GetTreasures();
-          }
+          Jogador.ChangeAttack(100);
+          Jogador.Weapon = CurrentRoom.GetTreasures();
         }
       }
-      // if (CurrentRoom.Name == "Sala 5")
-      // {
-      //   Console.WriteLine($"Você pisa em uma armadilha e perder {CurrentRoom.GetTrap().GetDamage()} de dano");
-      //   Jogador.ReduceHealth(CurrentRoom.GetTrap().GetDamage());
-      // }
+    
+      if (CurrentRoom.Name == "Sala 6" && CurrentRoom.GetTreasures() == "Poção de Cura")
+      {
+        Console.WriteLine($"Você encontrou uma {CurrentRoom.GetTreasures()} e ganha 50 de vida!");
+        Console.WriteLine($"Prepare-se para um grande desafio a frente.");
+        Jogador.IncreaseHealth(50);
+      }
     }
     catch (Exception ex)
     {
       Console.WriteLine("Não existe uma sala nesta direção");
     }
-
-    // Dentro do método MovePlayer, após a verificação do "treasureRoom"
 
     if (CurrentRoom.Name == "Sala 7" && CurrentRoom.GetEnemies() != null)
     {
@@ -298,6 +295,12 @@ class Program
       Console.WriteLine($"Você encontrou um poderoso inimigo: {enemyRoom.GetName()} com {enemyRoom.GetHealth()} de vida");
       Console.WriteLine($"O {enemyRoom.GetName()} começa atacando e você toma {enemyRoom.Attack} de dano");
       Jogador.ReduceHealth(enemyRoom.Attack);
+
+      if (Jogador.Weapon != "Espada Mestra")
+      {
+        Console.WriteLine("Você ainda não está pronto pra esse desafio. Encontre a Espada Mestra para derrotar o Mago Maligno.");
+        return;
+      }
 
       while (!enemyRoom.IsDefeated())
       {
@@ -334,7 +337,7 @@ class Program
         }
         else if (option == 2)
         {
-          showPlayerStatus();
+          showPlayerStatus(Jogador);
         }
       }
 
@@ -342,25 +345,17 @@ class Program
       {
         Console.WriteLine($"Parabéns, você derrotou o {enemyRoom.GetName()} e completou o desafio final!");
         Console.WriteLine("O jogo está concluído. Obrigado por jogar!");
-        gameRunning = false; 
+        gameRunning = false;
       }
-
-
-
-
     }
-
-
-
-
   }
 
-  public static void showPlayerStatus()
+  public static void showPlayerStatus(Player jogador)
   {
     Console.WriteLine("Status do Jogador:");
     Player.GetName();
     Player.GetHealth();
+    Console.WriteLine($"Arma atual: {jogador.Weapon}");
     Player.GetVocation();
-    Console.WriteLine("----------");
   }
 }
