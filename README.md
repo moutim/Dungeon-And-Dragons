@@ -37,7 +37,8 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
 ## Autores 🧙‍♂️
 
 Este projeto foi desenvolvido em conjunto por:
-- Vitor Moutim
-- Sidney Franca
+- [Vitor Moutim](https://www.linkedin.com/in/vitormoutim/)
+
+- [Sidney França](https://www.linkedin.com/in/sidney-fran%C3%A7a-86724b28b/)
 
 ---
