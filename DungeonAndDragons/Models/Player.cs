@@ -56,6 +56,11 @@ namespace DungeonAndDragons.Models
             Console.WriteLine($"Vocação do jogador: {Vocation}");
         }
 
+        public void GetWeapon()
+        {
+            Console.WriteLine($"Arma: {Weapon}");
+        }
+
         public static void GetHealth()
         {
             Console.WriteLine($"Saúde do {Vocation}: {Health}");
@@ -79,6 +84,11 @@ namespace DungeonAndDragons.Models
         public int GetAttack() 
         {
             return Attack;
+        }
+
+        public void ChangeAttack(int attack) 
+        {
+            Attack = attack;
         }
     }
 }

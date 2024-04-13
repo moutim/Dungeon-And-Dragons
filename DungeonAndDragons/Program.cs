@@ -94,13 +94,11 @@ class Program
     Treasure potion = new Treasure("Poção de Cura");
     Treasure masterSword = new Treasure("Espada Mestra");
 
-    Trap trapSala1 = new Trap(10);
     Trap trapSala5 = new Trap(20);
 
     Room room1 = new Room(
       message: "A sala está vazia, explore ao seu redor.",
-      name: "Sala 1",
-      trap: trapSala1
+      name: "Sala 1"
     );
 
     Room room2 = new Room(
@@ -126,8 +124,7 @@ class Program
     Room room5 = new Room(
       message: "Existem inimigos ou tesouros nesta sala.",
       name: "Sala 5",
-      trap: trapSala5,
-      treasure: potion
+      trap: trapSala5
     );
 
     Room room6 = new Room(
@@ -140,7 +137,7 @@ class Program
       message: "Voce chegou ao desafio final, enfrente o Mago.",
       name: "Sala 7",
       enemy: mage
-   );
+    );
 
     Room lobby = new Room(
           message: "Voce entrou na Dungeon, explore ao seu redor.",
@@ -241,6 +238,25 @@ class Program
         }
 
       }
+    
+      if (treasureRoom != null) {
+        if (CurrentRoom.Name == "Sala 3") {
+          Console.WriteLine("Existe um baú trancado nesta sala, parece que tem uma fechadura para uma velha chave enferrujada.");
+          if (Jogador.Key != null) {
+            Console.WriteLine($"A {Jogador.Key} está com você!");
+            Console.WriteLine($"Você abre o baú e ganha a {CurrentRoom.GetTreasures()}");
+
+            Jogador.ChangeAttack(100);
+            Jogador.Weapon = CurrentRoom.GetTreasures();
+          }
+        }
+      }
+    
+      // if (CurrentRoom.Name == "Sala 5")
+      // {
+      //   Console.WriteLine($"Você pisa em uma armadilha e perder {CurrentRoom.GetTrap().GetDamage()} de dano");
+      //   Jogador.ReduceHealth(CurrentRoom.GetTrap().GetDamage());
+      // }
     }
     catch (Exception ex)
     {
