@@ -207,7 +207,7 @@ class Program
           Console.WriteLine("--------------------------------------");
           Console.WriteLine("Escolha uma opção:");
           Console.WriteLine("1 - Atacar:");
-          Console.WriteLine("2 - Fugir (Perde 20 de vida):");
+          Console.WriteLine("2 - Ver status:");
 
           int option = int.Parse(Console.ReadLine());
 
@@ -236,7 +236,7 @@ class Program
           }
           else if (option == 2)
           {
-            Jogador.ReduceHealth(20);
+            showPlayerStatus();
           }
         }
 

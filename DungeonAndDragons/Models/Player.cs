@@ -52,12 +52,13 @@ namespace DungeonAndDragons.Models
 
         public static void GetVocation()
         {
-            Console.WriteLine($"Vocação do jogador: {Vocation}, Ataque: {Attack} e Vida: {Health}");
+            Console.WriteLine($"Ataque: {Attack}");
+            Console.WriteLine($"Vocação do jogador: {Vocation}");
         }
 
         public static void GetHealth()
         {
-            Console.WriteLine($"Saúde do {Vocation}: {Health}.");
+            Console.WriteLine($"Saúde do {Vocation}: {Health}");
         }
 
         public void ReduceHealth(int damage)

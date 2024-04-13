@@ -1,0 +1,15 @@
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.exe
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.deps.json
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.runtimeconfig.json
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.dll
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\bin\Debug\net8.0\DungeonAndDragons.pdb
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.AssemblyInfoInputs.cache
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.AssemblyInfo.cs
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.csproj.CoreCompileInputs.cache
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.sourcelink.json
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.dll
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\refint\DungeonAndDragons.dll
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.pdb
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\DungeonAndDragons.genruntimeconfig.cache
+C:\Users\vitorugo\Documents\Dungeon-And-Dragons\DungeonAndDragons\obj\Debug\net8.0\ref\DungeonAndDragons.dll
