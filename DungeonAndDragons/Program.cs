@@ -147,7 +147,7 @@ class Program
     );
 
     Room room5 = new Room(
-      message: "A sala está vazia, explore ao seu redor.",
+      message: "Parece que essa sala está muito quieta...",
       name: "Sala 5",
       trap: trapSala5
     );
@@ -287,6 +287,12 @@ class Program
     catch (Exception ex)
     {
       Console.WriteLine("Não existe uma sala nesta direção");
+    }
+
+    if (CurrentRoom.Name == "Sala 5" && CurrentRoom.HasTrap())
+    {
+      Console.WriteLine("Uh-oh! Você caiu em uma armadilha e perder 25 de vida! Sua jornada na masmorra ficou um pouco mais perigosa.");
+      Jogador.ReduceHealth(25);
     }
 
     if (CurrentRoom.Name == "Sala 7" && CurrentRoom.GetEnemies() != null)
