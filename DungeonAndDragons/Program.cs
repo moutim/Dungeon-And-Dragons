@@ -6,6 +6,7 @@ class Program
 {
   private Room[] Rooms;
   private Room CurrentRoom;
+  private Player Jogador;
   public static void Main()
   {
     Program program = new Program();
@@ -23,7 +24,7 @@ class Program
     Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
     string vocacao = Console.ReadLine();
 
-    Player jogador = new Player(nome, vocacao);
+    Jogador = new Player(nome, vocacao);
 
     Room[] rooms = CreateRooms();
     Rooms = rooms;
@@ -34,7 +35,7 @@ class Program
     while (gameRunning)
     {
       Console.WriteLine("--------------------------------------");
-      Console.WriteLine($"Escolha uma ação {jogador.Vocation}:");
+      Console.WriteLine($"Escolha uma ação {Jogador.Vocation}:");
       Console.WriteLine("1. Mover para outra sala");
       Console.WriteLine("2. Ver status");
       Console.WriteLine("3. Desistir");
@@ -45,12 +46,9 @@ class Program
       switch (option)
       {
         case 1:
-          CurrentRoom.GetName();
           Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
           string direcao = Console.ReadLine();
           MovePlayer(direcao);
-          CurrentRoom.GetName();
-          CurrentRoom.GetMessage();
           break;
         default:
           Console.WriteLine("Escolha uma opção válida!");
@@ -116,14 +114,13 @@ class Program
 
     Room room7 = new Room(
       message: "Voce chegou ao desafio final, enfrente o Mago.",
-     name: "Sala 7",
-     enemy: mage
+      name: "Sala 7",
+      enemy: mage
    );
 
     Room lobby = new Room(
           message: "Voce entrou na Dungeon, explore ao seu redor.",
           name: "Saguão"
-
         );
 
     lobby.AddExit("oeste", room1);
@@ -163,37 +160,63 @@ class Program
 
   public void MovePlayer(string direction)
   {
-
-
     try
     {
-
       Room nextRoom = CurrentRoom.GetExits()[direction];
       CurrentRoom = nextRoom;
+
+      Console.WriteLine("-------//-------//-------");
+      CurrentRoom.GetMessage();
+      Jogador.GetHealth();
+
+      Enemy? enemyRoom = CurrentRoom.GetEnemies();
+
+      if (enemyRoom != null)
+      {
+        Console.WriteLine("-------//-------//-------");
+      
+        Console.WriteLine($"Você encontrou um {enemyRoom.GetName()} com {enemyRoom.GetHealth()} de vida");
+        Console.WriteLine($"O {enemyRoom.GetName()} começa atacando e você toma {enemyRoom.Attack} de dano");
+
+        Jogador.ReduceHealth(enemyRoom.Attack);
+        Jogador.GetHealth();
+
+        while (!enemyRoom.IsDefeated())
+        {
+          Console.WriteLine("--------------------------------------");
+          Console.WriteLine("Escolha uma opção:");
+          Console.WriteLine("1 - Atacar:");
+          Console.WriteLine("2 - Fugir (Perde 20 de vida):");
+
+          int option = int.Parse(Console.ReadLine());
+
+          if (option == 1)
+          {
+            Console.WriteLine($"Você faz um ataque de {Jogador.Attack} de dano com o {Jogador.Weapon} no inimigo!");
+            enemyRoom.ReduceHealth(Jogador.Attack);
+
+            if (enemyRoom.GetHealth() <= 0) {
+              Console.WriteLine($"Com esse ataque o {enemyRoom.GetName()} da seu último suspiro e morre");
+              Console.WriteLine($"Ao cair, o {enemyRoom.GetName()} deixa uma {CurrentRoom.GetTreasures()} cair e você pega ela. Pode ser útil para abrir alguma coisa.");
+            } else {
+              Console.WriteLine($"O {enemyRoom.GetName()} revida e você toma {enemyRoom.Attack} de dano");
+              Jogador.ReduceHealth(enemyRoom.Attack);
+              
+              Console.WriteLine($"O {enemyRoom.GetName()} agora está com {enemyRoom.GetHealth()} de vida");
+            }
+          }
+          else if (option == 2)
+          {
+            Jogador.ReduceHealth(20);
+          }
+        }
+
+      }
+
     }
     catch (Exception ex)
     {
       Console.WriteLine("Não há uma sala nessa direção.");
     }
-
-
-
-
-
-    // int trapDamage = currentRoom.ActivateTrap();
-    // if (trapDamage > 0)
-    // {
-    //     Console.WriteLine("Você ativou uma armadilha e sofreu " + trapDamage + " de dano!");
-    //     player.ReduceHealth(trapDamage);
-    // }
-
-    // if (currentRoom.GetEnemies().Length == 0 && currentRoom.GetTreasures().Length == 0)
-    // {
-    //     Console.WriteLine("A sala está vazia. Continue explorando.");
-    // }
-    // else
-    // {
-    //     Console.WriteLine("Há inimigos ou tesouros nesta sala. Tome cuidado!");
-    // }
   }
 }

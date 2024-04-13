@@ -9,7 +9,7 @@ namespace DungeonAndDragons.Models
     {
         private string Name { get; set; }
         private int Health { get; set; }
-        private int Attack { get; set; }
+        public int Attack { get; set; }
 
         public Enemy(string name, int health, int attack)
         {
@@ -18,14 +18,14 @@ namespace DungeonAndDragons.Models
             Attack = attack;;
         }
 
-        public void GetName()
+        public string GetName()
         {
-            Console.WriteLine(Name);
+            return Name;
         }
 
-        public void GetHealth()
+        public int GetHealth()
         {
-            Console.WriteLine($"Saúde do {Name}: {Health}");
+            return Health;
         }
 
         public int EnemyAttack()

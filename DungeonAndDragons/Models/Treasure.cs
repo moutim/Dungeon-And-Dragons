@@ -16,7 +16,7 @@ namespace DungeonAndDragons.Models
             IsCollected = false;
         }
 
-        public string getName()
+        public string GetName()
         {
             return Name;
         }

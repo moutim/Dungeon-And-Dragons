@@ -30,7 +30,7 @@ namespace DungeonAndDragons.Models
 
         public void GetName()
         {
-          Console.WriteLine($"Você está na {Name}");
+            Console.WriteLine($"Você está na {Name}");
         }
 
         public void GetMessage() {
@@ -47,14 +47,14 @@ namespace DungeonAndDragons.Models
             Exits.Add(direction, room);
         }
 
-        public Enemy GetEnemies()
+        public Enemy? GetEnemies()
         {
             return Enemies;
         }
 
-        public Treasure GetTreasures()
+        public string GetTreasures()
         {
-            return Treasures;
+            return Treasures.GetName();
         }
 
         public void AddEnemy(Enemy enemy)
