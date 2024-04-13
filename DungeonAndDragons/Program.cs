@@ -152,9 +152,6 @@ class Program
     rooms[6] = room6;
     rooms[7] = room7;
 
-
-
-
     return rooms;
   }
 
@@ -174,7 +171,7 @@ class Program
       if (enemyRoom != null)
       {
         Console.WriteLine("-------//-------//-------");
-      
+
         Console.WriteLine($"Você encontrou um {enemyRoom.GetName()} com {enemyRoom.GetHealth()} de vida");
         Console.WriteLine($"O {enemyRoom.GetName()} começa atacando e você toma {enemyRoom.Attack} de dano");
 
@@ -195,13 +192,21 @@ class Program
             Console.WriteLine($"Você faz um ataque de {Jogador.Attack} de dano com o {Jogador.Weapon} no inimigo!");
             enemyRoom.ReduceHealth(Jogador.Attack);
 
-            if (enemyRoom.GetHealth() <= 0) {
+            if (enemyRoom.GetHealth() <= 0)
+            {
               Console.WriteLine($"Com esse ataque o {enemyRoom.GetName()} da seu último suspiro e morre");
-              Console.WriteLine($"Ao cair, o {enemyRoom.GetName()} deixa uma {CurrentRoom.GetTreasures()} cair e você pega ela. Pode ser útil para abrir alguma coisa.");
-            } else {
+
+              if (CurrentRoom.Name == "Sala 2") {
+                Console.WriteLine($"Ao cair, o {enemyRoom.GetName()} deixa uma {CurrentRoom.GetTreasures()} cair e você pega ela. Pode ser útil para abrir alguma coisa.");
+                Jogador.Key = CurrentRoom.GetTreasures();
+              }
+              
+            }
+            else
+            {
               Console.WriteLine($"O {enemyRoom.GetName()} revida e você toma {enemyRoom.Attack} de dano");
               Jogador.ReduceHealth(enemyRoom.Attack);
-              
+
               Console.WriteLine($"O {enemyRoom.GetName()} agora está com {enemyRoom.GetHealth()} de vida");
             }
           }

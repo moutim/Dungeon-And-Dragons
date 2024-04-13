@@ -7,7 +7,7 @@ namespace DungeonAndDragons.Models
 {
     public class Room
     {
-        private string Name;
+        public string Name;
 
         private Dictionary<string, Room> Exits = new Dictionary<string, Room>();
 
