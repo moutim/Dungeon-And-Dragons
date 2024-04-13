@@ -19,9 +19,31 @@ class Program
 
     Console.WriteLine("Qual o seu nome pobre alma?");
     string nome = Console.ReadLine();
+    
+    string vocacao;
+    do
+    {
+      Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
+      vocacao = Console.ReadLine();
 
-    Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
-    string vocacao = Console.ReadLine();
+      switch (vocacao)
+      {
+        case "1":
+          Console.WriteLine("Você escolheu Guerreiro!");
+          break;
+        case "2":
+          Console.WriteLine("Você escolheu Mago!");
+          break;
+        case "3":
+          Console.WriteLine("Você escolheu Arqueiro!");
+          break;
+        default:
+          Console.WriteLine("Vocação inválida. Por favor, escolha uma opção entre 1 e 3.");
+          vocacao = null;
+          break;
+      }
+    } while (vocacao == null);
+
 
     Player jogador = new Player(nome, vocacao);
 
@@ -33,8 +55,9 @@ class Program
 
     while (gameRunning)
     {
+
       Console.WriteLine("--------------------------------------");
-      Console.WriteLine($"Escolha uma ação {jogador.Vocation}:");
+      Console.WriteLine($"Escolha uma ação VocaçãoDoJogador/Nome:");
       Console.WriteLine("1. Mover para outra sala");
       Console.WriteLine("2. Ver status");
       Console.WriteLine("3. Desistir");
@@ -52,12 +75,29 @@ class Program
           CurrentRoom.GetName();
           CurrentRoom.GetMessage();
           break;
+          case 2:
+          showPlayerStatus();
+          break;
+          case 3:
+          Console.WriteLine("Obrigado por jogar! Jogo encerrado.");
+          gameRunning = false;
+          break;
         default:
           Console.WriteLine("Escolha uma opção válida!");
           break;
       }
     }
   }
+
+  public static void showPlayerStatus() {
+        Console.WriteLine("Status do Jogador:");
+        Player.GetName();
+        Player.GetHealth();
+        Player.GetVocation();
+        Console.WriteLine("----------");
+    }
+
+
 
   private static Room[] CreateRooms()
   {
@@ -78,7 +118,8 @@ class Program
     Room room1 = new Room(
       message: "A sala está vazia, explore ao seu redor.",
       name: "Sala 1",
-      trap: trapSala1
+      trap: trapSala1,
+      treasure: potion
     );
 
     Room room2 = new Room(
@@ -104,8 +145,8 @@ class Program
     Room room5 = new Room(
       message: "Existem inimigos ou tesouros nesta sala.",
       name: "Sala 5",
-      trap: trapSala5,
-      treasure: potion
+      trap: trapSala5
+      
     );
 
     Room room6 = new Room(

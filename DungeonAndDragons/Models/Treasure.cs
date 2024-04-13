@@ -7,7 +7,7 @@ namespace DungeonAndDragons.Models
 {
     public class Treasure
     {
-        private string Name;
+        private static string Name;
         private bool IsCollected;
 
         public Treasure(string name)
@@ -16,9 +16,9 @@ namespace DungeonAndDragons.Models
             IsCollected = false;
         }
 
-        public string getName()
+        public static void GetName()
         {
-            return Name;
+            Console.WriteLine("Você encontrou um tesouro: " + Name + "!");
         }
 
         public bool isCollected()
@@ -26,10 +26,6 @@ namespace DungeonAndDragons.Models
             return IsCollected;
         }
 
-        public void collect()
-        {
-            IsCollected = true;
-            Console.WriteLine("Você encontrou um tesouro: " + Name + "!");
-        }
+      
     }
 }

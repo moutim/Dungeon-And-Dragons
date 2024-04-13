@@ -13,6 +13,8 @@ namespace DungeonAndDragons.Models
         {
             Damage = damage;
         }
+        
+        
 
         public void ActivateTrap()
         {
