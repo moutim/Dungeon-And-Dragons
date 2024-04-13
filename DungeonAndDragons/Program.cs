@@ -21,8 +21,29 @@ class Program
     Console.WriteLine("Qual o seu nome pobre alma?");
     string nome = Console.ReadLine();
 
-    Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
-    string vocacao = Console.ReadLine();
+    string vocacao;
+    do
+    {
+      Console.WriteLine("Escolha uma vocação: \n 1 - Guerreiro (100 de vida e 30 de ataque), \n 2 - Mago (80 de vida e 40 de ataque), \n 3 - Arqueiro (60 de vida e 50 de ataque)");
+      vocacao = Console.ReadLine();
+
+      switch (vocacao)
+      {
+        case "1":
+          Console.WriteLine("Você escolheu Guerreiro!");
+          break;
+        case "2":
+          Console.WriteLine("Você escolheu Mago!");
+          break;
+        case "3":
+          Console.WriteLine("Você escolheu Arqueiro!");
+          break;
+        default:
+          Console.WriteLine("Vocação inválida. Por favor, escolha uma opção entre 1 e 3.");
+          vocacao = null;
+          break;
+      }
+    } while (vocacao == null);
 
     Jogador = new Player(nome, vocacao);
 
@@ -35,7 +56,7 @@ class Program
     while (gameRunning)
     {
       Console.WriteLine("--------------------------------------");
-      Console.WriteLine($"Escolha uma ação {Jogador.Vocation}:");
+      Console.WriteLine("Escolha uma ação:");
       Console.WriteLine("1. Mover para outra sala");
       Console.WriteLine("2. Ver status");
       Console.WriteLine("3. Desistir");
@@ -49,6 +70,9 @@ class Program
           Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
           string direcao = Console.ReadLine();
           MovePlayer(direcao);
+          break;
+        case 2:
+          showPlayerStatus();
           break;
         default:
           Console.WriteLine("Escolha uma opção válida!");
@@ -164,9 +188,10 @@ class Program
 
       Console.WriteLine("-------//-------//-------");
       CurrentRoom.GetMessage();
-      Jogador.GetHealth();
+      CurrentRoom.GetName();
 
       Enemy? enemyRoom = CurrentRoom.GetEnemies();
+      string? treasureRoom = CurrentRoom.GetTreasures();
 
       if (enemyRoom != null)
       {
@@ -176,7 +201,6 @@ class Program
         Console.WriteLine($"O {enemyRoom.GetName()} começa atacando e você toma {enemyRoom.Attack} de dano");
 
         Jogador.ReduceHealth(enemyRoom.Attack);
-        Jogador.GetHealth();
 
         while (!enemyRoom.IsDefeated())
         {
@@ -189,8 +213,8 @@ class Program
 
           if (option == 1)
           {
-            Console.WriteLine($"Você faz um ataque de {Jogador.Attack} de dano com o {Jogador.Weapon} no inimigo!");
-            enemyRoom.ReduceHealth(Jogador.Attack);
+            Console.WriteLine($"Você faz um ataque de {Jogador.GetAttack()} de dano com o {Jogador.Weapon} no inimigo!");
+            enemyRoom.ReduceHealth(Jogador.GetAttack());
 
             if (enemyRoom.GetHealth() <= 0)
             {
@@ -217,11 +241,18 @@ class Program
         }
 
       }
-
     }
     catch (Exception ex)
     {
       Console.WriteLine("Não há uma sala nessa direção.");
     }
   }
+
+  public static void showPlayerStatus() {
+        Console.WriteLine("Status do Jogador:");
+        Player.GetName();
+        Player.GetHealth();
+        Player.GetVocation();
+        Console.WriteLine("----------");
+    }
 }

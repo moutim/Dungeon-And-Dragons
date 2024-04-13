@@ -7,12 +7,13 @@ namespace DungeonAndDragons.Models
 {
     public class Player
     {
-        public string Name { get; set; }
-        public string Vocation { get; set; }
-        public int Attack { get; set; }
-        public int Health { get; set; }
+        public static string Name { get; set; }
+        public static string Vocation { get; set; }
+        public static int Attack { get; set; }
+        public static int Health { get; set; }
         public string Weapon { get; set; }
         public string? Key { get; set; }
+        public static bool Potion { get; set; }
 
         public Player(string name, string vocation)
         {
@@ -44,7 +45,17 @@ namespace DungeonAndDragons.Models
             }
         }
 
-        public void GetHealth()
+        public static void GetName()
+        {
+            Console.WriteLine($"Nome do jogador: {Name}");
+        }
+
+        public static void GetVocation()
+        {
+            Console.WriteLine($"Vocação do jogador: {Vocation}, Ataque: {Attack} e Vida: {Health}");
+        }
+
+        public static void GetHealth()
         {
             Console.WriteLine($"Saúde do {Vocation}: {Health}.");
         }
@@ -62,6 +73,11 @@ namespace DungeonAndDragons.Models
         public void IsDeafeated()
         {
             Health = 0;
+        }
+
+        public int GetAttack() 
+        {
+            return Attack;
         }
     }
 }
