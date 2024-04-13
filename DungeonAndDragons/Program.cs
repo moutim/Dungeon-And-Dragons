@@ -4,6 +4,8 @@ using Microsoft.VisualBasic;
 
 class Program
 {
+
+   bool gameRunning = true;
   private Room[] Rooms;
   private Room CurrentRoom;
   private Player Jogador;
@@ -15,6 +17,9 @@ class Program
 
   private void RunGame()
   {
+
+   
+
     Console.WriteLine("Bem vindo ao Dungeon Game!");
     Console.WriteLine("Para começar o jogo, escolha um nome e uma classe!");
 
@@ -51,52 +56,52 @@ class Program
     Rooms = rooms;
 
     CurrentRoom = Rooms[0];
-    bool gameRunning = true;
+    
 
     while (gameRunning)
-{
-    Console.WriteLine("--------------------------------------");
-    Console.WriteLine("Escolha uma ação:");
-    Console.WriteLine("1. Mover para outra sala");
-    Console.WriteLine("2. Ver status");
-    Console.WriteLine("3. Desistir");
-    Console.WriteLine("--------------------------------------");
-
-    int option;
-    if (!int.TryParse(Console.ReadLine(), out option))
     {
+      Console.WriteLine("--------------------------------------");
+      Console.WriteLine("Escolha uma ação:");
+      Console.WriteLine("1. Mover para outra sala");
+      Console.WriteLine("2. Ver status");
+      Console.WriteLine("3. Desistir");
+      Console.WriteLine("--------------------------------------");
+
+      int option;
+      if (!int.TryParse(Console.ReadLine(), out option))
+      {
         Console.WriteLine("Por favor, digite um número para escolher uma ação.");
         continue;
-    }
+      }
 
-    switch (option)
-    {
+      switch (option)
+      {
         case 1:
-            string direcao;
-            do
+          string direcao;
+          do
+          {
+            Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
+            direcao = Console.ReadLine().ToLower();
+            if (direcao != "norte" && direcao != "leste" && direcao != "sul" && direcao != "oeste")
             {
-                Console.WriteLine("Digite uma direção: norte, leste, sul ou oeste.");
-                direcao = Console.ReadLine().ToLower();
-                if (direcao != "norte" && direcao != "leste" && direcao != "sul" && direcao != "oeste")
-                {
-                    Console.WriteLine("Direção inválida. Por favor, digite uma direção válida.");
-                    direcao = null; 
-                }
-            } while (direcao == null);
-            MovePlayer(direcao);
-            break;
+              Console.WriteLine("Direção inválida. Por favor, digite uma direção válida.");
+              direcao = null;
+            }
+          } while (direcao == null);
+          MovePlayer(direcao);
+          break;
         case 2:
-            showPlayerStatus();
-            break;
+          showPlayerStatus();
+          break;
         case 3:
-            gameRunning = false;
-            Console.WriteLine("Você desistiu do jogo.");
-            break;
+          gameRunning = false;
+          Console.WriteLine("Você desistiu do jogo.");
+          break;
         default:
-            Console.WriteLine("Escolha uma opção válida!");
-            break;
+          Console.WriteLine("Escolha uma opção válida!");
+          break;
+      }
     }
-}
 
 
 
@@ -148,13 +153,12 @@ class Program
     );
 
     Room room6 = new Room(
-      message: "Existem inimigos ou tesouros nesta sala.",
-      name: "Sala 6",
-      enemy: mummy
+      message: "A sala está vazia, explore ao seu redor.",
+      name: "Sala 6"
     );
 
     Room room7 = new Room(
-      message: "Voce chegou ao desafio final, enfrente o Mago.",
+      message: "Voce chegou ao desafio final, um poderoso inimigo se ergue a sua frente!",
       name: "Sala 7",
       enemy: mage
     );
@@ -210,7 +214,7 @@ class Program
       Enemy? enemyRoom = CurrentRoom.GetEnemies();
       string? treasureRoom = CurrentRoom.GetTreasures();
 
-      if (enemyRoom != null)
+      if (enemyRoom != null )
       {
         Console.WriteLine("-------//-------//-------");
 
@@ -237,11 +241,12 @@ class Program
             {
               Console.WriteLine($"Com esse ataque o {enemyRoom.GetName()} da seu último suspiro e morre");
 
-              if (CurrentRoom.Name == "Sala 2") {
+              if (CurrentRoom.Name == "Sala 2")
+              {
                 Console.WriteLine($"Ao cair, o {enemyRoom.GetName()} deixa uma {CurrentRoom.GetTreasures()} cair e você pega ela. Pode ser útil para abrir alguma coisa.");
                 Jogador.Key = CurrentRoom.GetTreasures();
               }
-              
+
             }
             else
             {
@@ -258,11 +263,14 @@ class Program
         }
 
       }
-    
-      if (treasureRoom != null) {
-        if (CurrentRoom.Name == "Sala 3") {
+
+      if (treasureRoom != null)
+      {
+        if (CurrentRoom.Name == "Sala 3")
+        {
           Console.WriteLine("Existe um baú trancado nesta sala, parece que tem uma fechadura para uma velha chave enferrujada.");
-          if (Jogador.Key != null) {
+          if (Jogador.Key != null)
+          {
             Console.WriteLine($"A {Jogador.Key} está com você!");
             Console.WriteLine($"Você abre o baú e ganha a {CurrentRoom.GetTreasures()}");
 
@@ -271,7 +279,6 @@ class Program
           }
         }
       }
-    
       // if (CurrentRoom.Name == "Sala 5")
       // {
       //   Console.WriteLine($"Você pisa em uma armadilha e perder {CurrentRoom.GetTrap().GetDamage()} de dano");
@@ -282,13 +289,78 @@ class Program
     {
       Console.WriteLine("Não existe uma sala nesta direção");
     }
+
+    // Dentro do método MovePlayer, após a verificação do "treasureRoom"
+
+    if (CurrentRoom.Name == "Sala 7" && CurrentRoom.GetEnemies() != null)
+    {
+      Enemy enemyRoom = CurrentRoom.GetEnemies();
+      Console.WriteLine($"Você encontrou um poderoso inimigo: {enemyRoom.GetName()} com {enemyRoom.GetHealth()} de vida");
+      Console.WriteLine($"O {enemyRoom.GetName()} começa atacando e você toma {enemyRoom.Attack} de dano");
+      Jogador.ReduceHealth(enemyRoom.Attack);
+
+      while (!enemyRoom.IsDefeated())
+      {
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine("Escolha uma opção:");
+        Console.WriteLine("1 - Atacar:");
+        Console.WriteLine("2 - Ver status:");
+
+        int option = int.Parse(Console.ReadLine());
+
+        if (option == 1)
+        {
+          Console.WriteLine($"Você faz um ataque de {Jogador.GetAttack()} de dano com o {Jogador.Weapon} no inimigo!");
+          enemyRoom.ReduceHealth(Jogador.GetAttack());
+
+          if (enemyRoom.GetHealth() <= 0)
+          {
+            Console.WriteLine($"Com esse ataque o {enemyRoom.GetName()} da seu último suspiro e morre");
+
+            if (CurrentRoom.Name == "Sala 2")
+            {
+              Console.WriteLine($"Ao cair, o {enemyRoom.GetName()} deixa uma {CurrentRoom.GetTreasures()} cair e você pega ela. Pode ser útil para abrir alguma coisa.");
+              Jogador.Key = CurrentRoom.GetTreasures();
+            }
+
+          }
+          else
+          {
+            Console.WriteLine($"O {enemyRoom.GetName()} revida e você toma {enemyRoom.Attack} de dano");
+            Jogador.ReduceHealth(enemyRoom.Attack);
+
+            Console.WriteLine($"O {enemyRoom.GetName()} agora está com {enemyRoom.GetHealth()} de vida");
+          }
+        }
+        else if (option == 2)
+        {
+          showPlayerStatus();
+        }
+      }
+
+      if (CurrentRoom.Name == "Sala 7" && enemyRoom.IsDefeated())
+      {
+        Console.WriteLine($"Parabéns, você derrotou o {enemyRoom.GetName()} e completou o desafio final!");
+        Console.WriteLine("O jogo está concluído. Obrigado por jogar!");
+        gameRunning = false; 
+      }
+
+
+
+
+    }
+
+
+
+
   }
 
-  public static void showPlayerStatus() {
-        Console.WriteLine("Status do Jogador:");
-        Player.GetName();
-        Player.GetHealth();
-        Player.GetVocation();
-        Console.WriteLine("----------");
-    }
+  public static void showPlayerStatus()
+  {
+    Console.WriteLine("Status do Jogador:");
+    Player.GetName();
+    Player.GetHealth();
+    Player.GetVocation();
+    Console.WriteLine("----------");
+  }
 }

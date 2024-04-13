@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\sidne\\.nuget\\packages\\": {}
+    "/home/codespace/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\DungeonAndDragons\\DungeonAndDragons.csproj",
+      "projectUniqueName": "/workspaces/Dungeon-And-Dragons/DungeonAndDragons/DungeonAndDragons.csproj",
       "projectName": "DungeonAndDragons",
-      "projectPath": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\DungeonAndDragons\\DungeonAndDragons.csproj",
-      "packagesPath": "C:\\Users\\sidne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sidne\\Programação\\csharpSenac\\Dungeon-And-Dragons\\DungeonAndDragons\\obj\\",
+      "projectPath": "/workspaces/Dungeon-And-Dragons/DungeonAndDragons/DungeonAndDragons.csproj",
+      "packagesPath": "/home/codespace/.nuget/packages/",
+      "outputPath": "/workspaces/Dungeon-And-Dragons/DungeonAndDragons/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sidne\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/codespace/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
